@@ -1,1 +1,155 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Invitation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #192A51, #3A4F7A);
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      opacity: 0.8;
+    }
+
+    .event-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      margin: 30px auto;
+      max-width: 500px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .event-title {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .event-date {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      margin-top: 15px;
+      background: white;
+      color: #192A51;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #ddd;
+    }
+
+    .countdown {
+      font-size: 20px;
+      margin-top: 20px;
+      font-weight: 500;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      opacity: 0.6;
+    }
+
+    @media(max-width:600px){
+      h1 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>You're Invited ✨</h1>
+    <p>Join us for a special event</p>
+
+    <!-- Wedding -->
+    <div class="event-card">
+      <div class="event-title">💍 Wedding Ceremony</div>
+      <div class="event-date">August 20, 2026 • 18:00</div>
+      <p>Celebrate love with us on this beautiful day</p>
+      <a href="#" class="btn">RSVP</a>
+    </div>
+
+    <!-- Birthday -->
+    <div class="event-card">
+      <div class="event-title">🎉 Birthday Party</div>
+      <div class="event-date">September 5, 2026 • 20:00</div>
+      <p>Let’s celebrate together with music & fun</p>
+      <a href="#" class="btn">Join Party</a>
+    </div>
+
+    <!-- Corporate -->
+    <div class="event-card">
+      <div class="event-title">🏢 Corporate Event</div>
+      <div class="event-date">October 12, 2026 • 10:00</div>
+      <p>Networking, innovation & success</p>
+      <a href="#" class="btn">Register</a>
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown" id="countdown"></div>
+
+    <footer>
+      © 2026 Event Invitation • Designed with ❤️
+    </footer>
+  </div>
+
+  <script>
+    const eventDate = new Date("August 20, 2026 18:00:00").getTime();
+
+    const timer = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+      document.getElementById("countdown").innerHTML =
+        "⏳ Event starts in: " + days + "d " + hours + "h " + minutes + "m";
+
+      if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById("countdown").innerHTML = "Event Started 🎉";
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
