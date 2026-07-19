@@ -34,7 +34,7 @@
         .hero {
             height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                        url('images/photo-1.jpg') center/cover;
+                        url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -136,28 +136,6 @@
             font-weight: 700;
         }
 
-        /* Featured Photo Section */
-        .featured-photo {
-            padding: 100px 20px;
-            background: var(--white);
-            text-align: center;
-        }
-
-        .featured-photo img {
-            max-width: 800px;
-            width: 100%;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            margin-bottom: 2rem;
-        }
-
-        .featured-photo h2 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-top: 2rem;
-        }
-
         /* Countdown Section */
         .countdown {
             padding: 80px 20px;
@@ -208,7 +186,7 @@
         .program {
             padding: 100px 20px;
             background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)),
-                        url('images/photo-2.jpg') center/cover fixed;
+                        url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1920') center/cover fixed;
         }
 
         .program h2 {
@@ -581,7 +559,7 @@
 </head>
 <body>
 
-    <!-- Hero Section with Photo 1 -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>Armen</h1>
@@ -602,12 +580,6 @@
             <div class="names">Armen & Ani</div>
             <p>Together with our families, we warmly invite you to celebrate our wedding day.</p>
         </div>
-    </section>
-
-    <!-- Featured Photo Section with Photo 5 -->
-    <section class="featured-photo">
-        <img src="images/photo-5.jpg" alt="Armen & Ani">
-        <h2>Our Love Story</h2>
     </section>
 
     <!-- Countdown Section -->
@@ -663,27 +635,27 @@
         </div>
     </section>
 
-    <!-- Gallery Section with All Photos -->
+    <!-- Gallery Section -->
     <section class="gallery">
-        <h2>Our Gallery</h2>
+        <h2>Our Love Story</h2>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="images/photo-1.jpg" alt="Couple Photo 1">
+                <img src="https://images.unsplash.com/photo-1522673607200-1645062cd495?w=600" alt="Couple Photo 1">
             </div>
             <div class="gallery-item">
-                <img src="images/photo-2.jpg" alt="Couple Photo 2">
+                <img src="https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600" alt="Couple Photo 2">
             </div>
             <div class="gallery-item">
-                <img src="images/photo-3.jpg" alt="Couple Photo 3">
+                <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600" alt="Couple Photo 3">
             </div>
             <div class="gallery-item">
-                <img src="images/photo-4.jpg" alt="Couple Photo 4">
+                <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600" alt="Couple Photo 4">
             </div>
             <div class="gallery-item">
-                <img src="images/photo-5.jpg" alt="Couple Photo 5">
+                <img src="https://images.unsplash.com/photo-1522673607200-1645062cd495?w=600" alt="Couple Photo 5">
             </div>
             <div class="gallery-item">
-                <img src="images/photo-6.jpg" alt="Couple Photo 6">
+                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600" alt="Couple Photo 6">
             </div>
         </div>
     </section>
@@ -844,7 +816,7 @@
         }, observerOptions);
 
         // Observe elements
-        document.querySelectorAll('.program-item, .gallery-item, .countdown-item, .featured-photo img').forEach(el => {
+        document.querySelectorAll('.program-item, .gallery-item, .countdown-item').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'all 0.6s ease-out';
