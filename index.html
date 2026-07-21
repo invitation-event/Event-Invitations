@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebInvitation - Premium Digital Invitations</title>
+    <title>WebInvitation | Elegant Digital Invitations</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #C5A09F;
-            --primary-dark: #A67C7C;
-            --gold: #C9B037;
+            --primary: #C5A09F;       /* Dusty Rose */
+            --primary-dark: #A67C7C;  /* Darker Rose */
+            --gold: #C9B037;          /* Champagne Gold */
             --gold-light: #E5D5A5;
-            --bg: #FAF9F6;
+            --bg: #FAF9F6;            /* Off-white Cream */
             --white: #FFFFFF;
             --text-dark: #3D3D3D;
             --text-light: #7A7A7A;
+            --shadow-soft: 0 15px 40px rgba(197, 160, 159, 0.15);
+            --shadow-hover: 0 25px 50px rgba(197, 160, 159, 0.25);
         }
 
         * {
@@ -24,20 +26,41 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             color: var(--text-dark);
             background-color: var(--bg);
             line-height: 1.7;
+            overflow-x: hidden;
         }
 
         h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif;
         }
 
+        /* Elegant Background Elements */
+        .bg-decoration {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.3;
+        }
+        .bg-1 { width: 500px; height: 500px; background: var(--primary); top: -150px; right: -100px; animation: float 15s infinite ease-in-out; }
+        .bg-2 { width: 400px; height: 400px; background: var(--gold-light); bottom: 10%; left: -100px; animation: float 18s infinite ease-in-out reverse; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(30px, -40px) rotate(5deg); }
+        }
+
         /* Navigation */
         nav {
-            background: rgba(250, 249, 246, 0.95);
+            background: rgba(250, 249, 246, 0.9);
             backdrop-filter: blur(15px);
             padding: 1.2rem 5%;
             position: fixed;
@@ -45,6 +68,7 @@
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid rgba(197, 160, 159, 0.1);
+            transition: all 0.3s;
         }
 
         .nav-container {
@@ -61,11 +85,17 @@
             color: var(--primary-dark);
             font-weight: 700;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            letter-spacing: 0.5px;
         }
+
+        .logo i { color: var(--gold); }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
@@ -73,1002 +103,1024 @@
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
             transition: color 0.3s;
         }
 
-        .nav-links a:hover {
-            color: var(--primary-dark);
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
         }
 
-        /* Invitation Sections */
-        .invitation-showcase {
+        .nav-links a:hover { color: var(--primary-dark); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
             margin-top: 80px;
-            padding: 4rem 5%;
-        }
-
-        .invitation-card {
-            background: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            margin-bottom: 4rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 900px;
-        }
-
-        .invitation-preview {
-            background: linear-gradient(135deg, #f5f0eb 0%, #faf9f6 100%);
-            padding: 3rem;
+            min-height: 90vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 4rem 5%;
             position: relative;
+            background: linear-gradient(135deg, rgba(250, 249, 246, 0.95), rgba(197, 160, 159, 0.1)), 
+                        url('https://images.unsplash.com/photo-1519225468359-2996bc01c32c?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
         }
 
-        .phone-frame {
-            background: #1a1a1a;
-            border-radius: 40px;
-            padding: 15px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-            max-width: 320px;
-            width: 100%;
-        }
-
-        .phone-screen {
-            background: var(--white);
-            border-radius: 30px;
-            overflow: hidden;
-            aspect-ratio: 9/16;
-            position: relative;
-        }
-
-        .phone-notch {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 28px;
-            background: #1a1a1a;
-            border-bottom-left-radius: 16px;
-            border-bottom-right-radius: 16px;
-            z-index: 10;
-        }
-
-        /* Olive & Orchid Style */
-        .olive-orchid {
-            background: linear-gradient(180deg, #f8f5f2 0%, #e8e0d8 100%);
-            height: 100%;
-            padding: 40px 25px 30px;
+        .hero-content {
+            max-width: 900px;
             text-align: center;
-            font-family: 'Playfair Display', serif;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            padding: 4rem 3rem;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(201, 176, 55, 0.15);
+            color: var(--gold);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--primary-dark);
+            font-style: italic;
+        }
+
+        .hero .tagline {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.4s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(197, 160, 159, 0.4);
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(197, 160, 159, 0.6);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-dark);
+            border: 2px solid var(--primary);
+            box-shadow: none;
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 3rem 2.5rem;
+            border-radius: 24px;
+            border: 1px solid rgba(197, 160, 159, 0.1);
+            transition: all 0.4s;
             position: relative;
             overflow: hidden;
         }
 
-        .olive-orchid::before {
+        .service-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.3;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
         }
 
-        .oo-header {
-            position: relative;
-            z-index: 1;
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: transparent;
         }
 
-        .oo-floral {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            background: linear-gradient(135deg, #8B9D77 0%, #A8B890 100%);
-            border-radius: 50%;
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(197, 160, 159, 0.1);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            color: white;
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
         }
 
-        .oo-couple-names {
-            font-size: 2rem;
-            color: #5A6B5C;
-            margin: 20px 0;
-            font-weight: 600;
+        .service-card:hover .service-icon {
+            background: var(--primary);
+            color: var(--white);
+            transform: rotateY(180deg);
         }
 
-        .oo-date {
-            font-size: 1.1rem;
-            color: #8B9D77;
-            margin-bottom: 30px;
-            font-style: italic;
+        .service-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1.2rem;
+            color: var(--text-dark);
         }
 
-        .oo-message {
-            font-size: 0.9rem;
-            color: #7A7A7A;
-            line-height: 1.8;
-            margin-bottom: 30px;
+        .service-card ul {
+            list-style: none;
+            margin-bottom: 2rem;
         }
 
-        .oo-countdown {
-            background: rgba(139, 157, 119, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .oo-countdown-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-
-        .oo-countdown-item {
-            text-align: center;
-        }
-
-        .oo-countdown-number {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #5A6B5C;
-            display: block;
-        }
-
-        .oo-countdown-label {
-            font-size: 0.7rem;
-            color: #8B9D77;
-            text-transform: uppercase;
-        }
-
-        /* Pearl & Lace Style */
-        .pearl-lace {
-            background: linear-gradient(180deg, #fff9f5 0%, #f5ebe3 100%);
-            height: 100%;
-            padding: 40px 25px 30px;
-            text-align: center;
+        .service-card ul li {
+            padding: 0.6rem 0;
+            padding-left: 2rem;
             position: relative;
-            overflow: hidden;
+            color: var(--text-light);
+            font-size: 0.95rem;
         }
 
-        .pearl-lace::before {
-            content: '';
+        .service-card ul li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
             position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
-            border: 2px solid rgba(212, 175, 155, 0.3);
-            border-radius: 20px;
-            pointer-events: none;
-        }
-
-        .pl-header {
-            position: relative;
-            z-index: 1;
-        }
-
-        .pl-monogram {
-            font-size: 3rem;
-            color: #D4AFB5;
-            margin-bottom: 20px;
-            font-weight: 700;
-            letter-spacing: 5px;
-        }
-
-        .pl-couple-names {
-            font-size: 1.8rem;
-            color: #8B6F6F;
-            margin: 15px 0;
-            font-style: italic;
-        }
-
-        .pl-date {
-            font-size: 1.2rem;
-            color: #C5A09F;
-            margin-bottom: 25px;
-            font-weight: 600;
-        }
-
-        .pl-calendar {
-            background: rgba(212, 175, 155, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .pl-calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-            text-align: center;
-            font-size: 0.8rem;
-        }
-
-        .pl-calendar-day-header {
-            color: #C5A09F;
-            font-weight: 600;
-            padding: 5px;
-        }
-
-        .pl-calendar-day {
-            padding: 8px 5px;
-            border-radius: 8px;
-        }
-
-        .pl-calendar-day.active {
-            background: #D4AFB5;
-            color: white;
-            font-weight: 700;
-        }
-
-        /* Limon Chello Style */
-        .limon-chello {
-            background: linear-gradient(180deg, #fffef0 0%, #f9f7e8 100%);
-            height: 100%;
-            padding: 40px 25px 30px;
-            text-align: center;
-            position: relative;
-        }
-
-        .lc-header {
-            margin-bottom: 30px;
-        }
-
-        .lc-lemon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
-
-        .lc-couple-names {
-            font-size: 2rem;
-            color: #D4A373;
-            margin: 15px 0;
-            font-weight: 700;
-        }
-
-        .lc-event-type {
+            left: 0;
+            color: var(--gold);
             font-size: 0.9rem;
-            color: #C9B037;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
         }
 
-        .lc-venue {
-            background: rgba(212, 163, 115, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .lc-venue-name {
-            font-size: 1.1rem;
-            color: #8B7355;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .lc-venue-time {
-            font-size: 1.5rem;
-            color: #D4A373;
+        .price-tag {
+            font-size: 2rem;
+            color: var(--primary-dark);
             font-weight: 700;
-        }
-
-        /* Rose Gold Gala Style */
-        .rose-gold-gala {
-            background: linear-gradient(180deg, #fff5f5 0%, #f5e6e6 100%);
-            height: 100%;
-            padding: 40px 25px 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .rgg-header {
-            position: relative;
-            z-index: 1;
-        }
-
-        .rgg-decorative-line {
-            width: 60px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #C9B896, transparent);
-            margin: 20px auto;
-        }
-
-        .rgg-crown {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: #D4AF37;
-        }
-
-        .rgg-couple-names {
-            font-size: 2.2rem;
-            color: #8B6F6F;
-            margin: 15px 0;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
-
-        .rgg-event-type {
-            font-size: 0.85rem;
-            color: #C9B896;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 25px;
-        }
-
-        .rgg-gold-accent {
-            background: linear-gradient(135deg, rgba(201, 184, 150, 0.2), rgba(212, 175, 147, 0.1));
-            border: 1px solid rgba(201, 184, 150, 0.3);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .rgg-venue-name {
-            font-size: 1.2rem;
-            color: #8B6F6F;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .rgg-time {
-            font-size: 1.8rem;
-            color: #C9B896;
-            font-weight: 700;
-            margin: 15px 0;
-        }
-
-        .rgg-countdown {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-top: 20px;
-        }
-
-        .rgg-countdown-item {
-            background: rgba(201, 184, 150, 0.15);
-            border-radius: 10px;
-            padding: 10px 5px;
-        }
-
-        .rgg-countdown-number {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #8B6F6F;
-            display: block;
-        }
-
-        .rgg-countdown-label {
-            font-size: 0.65rem;
-            color: #C9B896;
-            text-transform: uppercase;
-        }
-
-        /* Invitation Info Section */
-        .invitation-info {
-            padding: 4rem 3rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .info-section {
-            margin-bottom: 2.5rem;
-        }
-
-        .info-section h3 {
-            font-size: 1.5rem;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--primary);
-            display: inline-block;
-        }
-
-        .info-section p {
-            color: var(--text-light);
-            margin-bottom: 0.8rem;
-            line-height: 1.8;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 1.5rem;
-            background: var(--bg);
-            border-radius: 12px;
-        }
-
-        .info-icon {
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-
-        .info-content h4 {
-            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
             margin-bottom: 0.5rem;
-            color: var(--text-dark);
         }
 
-        .info-content p {
+        .price-tag span {
+            font-size: 1rem;
             color: var(--text-light);
-            font-size: 0.95rem;
-        }
-
-        .rsvp-form {
-            background: var(--bg);
-            padding: 2rem;
-            border-radius: 15px;
-            margin-top: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid rgba(197, 160, 159, 0.3);
-            border-radius: 8px;
             font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
+            font-weight: 400;
         }
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .radio-group {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .radio-item {
+        .time-tag {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .radio-item input[type="radio"] {
-            width: auto;
-            cursor: pointer;
+        /* Portfolio Section with Phone Mockup */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3.5rem;
+            flex-wrap: wrap;
         }
 
-        .btn-submit {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            border: none;
-            border-radius: 8px;
+        .filter-btn {
+            padding: 0.7rem 1.8rem;
+            background: transparent;
+            border: 1.5px solid var(--primary);
+            color: var(--primary-dark);
+            border-radius: 50px;
+            cursor: pointer;
             font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform 0.3s;
+            font-weight: 500;
+            transition: all 0.3s;
         }
 
-        .btn-submit:hover {
-            transform: translateY(-2px);
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+
+        .portfolio-item {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 0.4s;
+        }
+
+        .portfolio-item.hidden {
+            display: none;
+        }
+
+        /* Phone Mockup CSS */
+        .phone-mockup {
+            background: #1a1a1a;
+            border-radius: 36px;
+            padding: 12px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            position: relative;
+            margin: 0 auto;
+            max-width: 280px;
+            transition: transform 0.4s;
+        }
+
+        .phone-mockup:hover {
+            transform: translateY(-10px);
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 24px;
+            background: #1a1a1a;
+            border-bottom-left-radius: 14px;
+            border-bottom-right-radius: 14px;
+            z-index: 10;
+        }
+
+        .phone-screen {
+            border-radius: 26px;
+            overflow: hidden;
+            position: relative;
+            background: #fff;
+            aspect-ratio: 9/16;
+        }
+
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .phone-mockup:hover .phone-screen img {
+            transform: scale(1.05);
+        }
+
+        .rsvp-badge {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(4px);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .portfolio-info {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .portfolio-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .portfolio-price {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .portfolio-buttons {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+
+        .btn-small {
+            flex: 1;
+            padding: 0.8rem;
+            text-align: center;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .btn-view {
+            background: var(--bg);
+            color: var(--text-dark);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .btn-view:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .btn-order {
+            background: var(--text-dark);
+            color: var(--white);
+        }
+
+        .btn-order:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Process Section */
+        .process {
+            background: var(--white);
+            border-radius: 30px;
+            margin: 4rem auto;
+            padding: 5rem 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            position: relative;
+        }
+
+        .process-grid::before {
+            content: '';
+            position: absolute;
+            top: 45px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--gold), var(--primary), transparent);
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 70px;
+            height: 70px;
+            background: var(--white);
+            color: var(--primary-dark);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 5px 20px rgba(197, 160, 159, 0.2);
+            transition: all 0.3s;
+        }
+
+        .process-step:hover .step-number {
+            background: var(--primary);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .process-step h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+        }
+
+        .process-step p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            margin-bottom: 1rem;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-soft);
+            border-color: rgba(197, 160, 159, 0.2);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: rgba(197, 160, 159, 0.03);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 300px;
+        }
+
+        .faq-toggle {
+            font-size: 1rem;
+            color: var(--primary-dark);
+            transition: all 0.3s;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(197, 160, 159, 0.1);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: var(--text-dark);
+            clip-path: ellipse(55% 100% at 50% 100%);
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
         }
 
         /* Responsive */
-        @media (max-width: 968px) {
-            .invitation-card {
-                grid-template-columns: 1fr;
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero-content { padding: 3rem 1.5rem; }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(250, 249, 246, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 3rem;
+                transition: right 0.4s ease;
             }
-
-            .invitation-preview {
-                padding: 2rem;
-            }
-
-            .invitation-info {
-                padding: 2rem 1.5rem;
-            }
+            .nav-links.active { right: 0; }
+            .mobile-menu-btn { display: block; }
+            .btn-outline { margin-left: 0; margin-top: 1rem; display: block; width: 100%; text-align: center; }
+            .hero .buttons { display: flex; flex-direction: column; align-items: center; }
+            .section-title { font-size: 2.2rem; }
+            .process-grid::before { display: none; }
+            .portfolio-grid { gap: 2rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Animated Background -->
+    <div class="bg-decoration bg-1"></div>
+    <div class="bg-decoration bg-2"></div>
+
+    <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="#" class="logo">WebInvitation</a>
-            <ul class="nav-links">
-                <li><a href="#olive-orchid">Olive & Orchid</a></li>
-                <li><a href="#pearl-lace">Pearl & Lace</a></li>
-                <li><a href="#limon-chello">Limon Chello</a></li>
-                <li><a href="#rose-gold-gala">Rose Gold Gala</a></li>
+            <a href="#" class="logo"><i class="fa-solid fa-envelope-open-text"></i> WebInvitation</a>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+                <li><a href="#services" onclick="toggleMenu()">Services</a></li>
+                <li><a href="#portfolio" onclick="toggleMenu()">Portfolio</a></li>
+                <li><a href="#process" onclick="toggleMenu()">Process</a></li>
+                <li><a href="#faq" onclick="toggleMenu()">FAQ</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="invitation-showcase">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content reveal">
+            <span class="hero-badge">✨ Premium Digital Invitations</span>
+            <h1>Your Special Day, <br><span>Perfectly Invited</span></h1>
+            <p class="tagline">Elegant, eco-friendly, and unforgettable web invitations. Share your love story or celebration with a single, beautiful link.</p>
+            <div class="buttons">
+                <a href="#portfolio" class="btn">Explore Designs</a>
+                <a href="#services" class="btn btn-outline">How It Works</a>
+            </div>
+        </div>
+    </section>
 
-        <!-- Olive & Orchid -->
-        <div class="invitation-card" id="olive-orchid">
-            <div class="invitation-preview">
-                <div class="phone-frame">
+    <!-- Services Section -->
+    <section id="services">
+        <div class="section-header reveal">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">Tailored solutions to match the uniqueness of your event</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h3>Template Customization</h3>
+                <ul>
+                    <li>Choose from our curated gallery of elegant designs</li>
+                    <li>Personalize names, dates, venues, and dress codes</li>
+                    <li>Integrate Google Maps & countdown timers</li>
+                    <li>Add your favorite background music</li>
+                </ul>
+                <div class="time-tag"><i class="fa-regular fa-clock"></i> Delivery: 1–2 business days</div>
+                <div class="price-tag">$18 <span>starting</span></div>
+                <a href="#portfolio" class="btn" style="width: 100%; text-align: center; margin-top: 1rem;">Browse Templates</a>
+            </div>
+
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="fa-solid fa-pen-nib"></i></div>
+                <h3>Bespoke Custom Design</h3>
+                <ul>
+                    <li>100% unique design crafted from your inspiration</li>
+                    <li>Custom illustrations, watercolors, or typography</li>
+                    <li>Advanced interactive RSVP & guest questionnaire</li>
+                    <li>Unlimited revisions until you are 100% satisfied</li>
+                </ul>
+                <div class="time-tag"><i class="fa-regular fa-clock"></i> Delivery: 3–5 business days</div>
+                <div class="price-tag">$38 <span>starting</span></div>
+                <a href="#portfolio" class="btn" style="width: 100%; text-align: center; margin-top: 1rem;">Request Custom</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="section-header reveal">
+            <h2 class="section-title">Design Portfolio</h2>
+            <p class="section-subtitle">See how your invitation will look on your guests' phones</p>
+        </div>
+        
+        <div class="filter-buttons reveal">
+            <button class="filter-btn active" data-filter="all">All Designs</button>
+            <button class="filter-btn" data-filter="wedding">Wedding</button>
+            <button class="filter-btn" data-filter="birthday">Birthday</button>
+            <button class="filter-btn" data-filter="corporate">Corporate</button>
+        </div>
+
+        <div class="portfolio-grid">
+            <!-- Item 1: Wedding -->
+            <div class="portfolio-item reveal" data-category="wedding">
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
                     <div class="phone-screen">
-                        <div class="phone-notch"></div>
-                        <div class="olive-orchid">
-                            <div class="oo-header">
-                                <div class="oo-floral">🌿</div>
-                                <div class="oo-couple-names">Art & Lina</div>
-                                <div class="oo-date">July 22, 2026</div>
-                                <div class="oo-message">
-                                    Our love became a promise,<br>
-                                    and the promise - a new beginning.<br><br>
-                                    We invite you to share<br>
-                                    our special day.
-                                </div>
-                                <div class="oo-countdown">
-                                    <div class="oo-countdown-grid">
-                                        <div class="oo-countdown-item">
-                                            <span class="oo-countdown-number">16</span>
-                                            <span class="oo-countdown-label">Days</span>
-                                        </div>
-                                        <div class="oo-countdown-item">
-                                            <span class="oo-countdown-number">10</span>
-                                            <span class="oo-countdown-label">Hours</span>
-                                        </div>
-                                        <div class="oo-countdown-item">
-                                            <span class="oo-countdown-number">13</span>
-                                            <span class="oo-countdown-label">Min</span>
-                                        </div>
-                                        <div class="oo-countdown-item">
-                                            <span class="oo-countdown-number">12</span>
-                                            <span class="oo-countdown-label">Sec</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1607190074257-dd4b76e05d9a?auto=format&fit=crop&w=600&q=80" alt="Wedding Invitation" loading="lazy">
+                        <div class="rsvp-badge"><i class="fa-solid fa-check-circle"></i> RSVP Ready</div>
+                    </div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>Olive & Orchid</h3>
+                    <div class="portfolio-price">$38</div>
+                    <div class="portfolio-buttons">
+                        <a href="#" class="btn-small btn-view">Preview</a>
+                        <a href="#" class="btn-small btn-order">Order</a>
                     </div>
                 </div>
             </div>
-            <div class="invitation-info">
-                <h2 style="font-size: 2rem; margin-bottom: 2rem; color: var(--text-dark);">Olive & Orchid</h2>
-                
-                <div class="info-section">
-                    <h3>Wedding Details</h3>
-                    <div class="info-item">
-                        <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
-                        <div class="info-content">
-                            <h4>Villa Hills</h4>
-                            <p>Ptghni Village, 1st District<br>Kotayk Region</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon"><i class="fa-regular fa-clock"></i></div>
-                        <div class="info-content">
-                            <h4>Time</h4>
-                            <p>17:00</p>
-                        </div>
+
+            <!-- Item 2: Wedding -->
+            <div class="portfolio-item reveal" data-category="wedding">
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80" alt="Elegant Wedding" loading="lazy">
+                        <div class="rsvp-badge"><i class="fa-solid fa-check-circle"></i> RSVP Ready</div>
                     </div>
                 </div>
+                <div class="portfolio-info">
+                    <h3>Pearl & Lace</h3>
+                    <div class="portfolio-price">$40</div>
+                    <div class="portfolio-buttons">
+                        <a href="#" class="btn-small btn-view">Preview</a>
+                        <a href="#" class="btn-small btn-order">Order</a>
+                    </div>
+                </div>
+            </div>
 
-                <div class="rsvp-form">
-                    <h3 style="margin-bottom: 1.5rem;">RSVP Form</h3>
-                    <div class="form-group">
-                        <label>Full Name</label>
-                        <input type="text" placeholder="Enter your name">
+            <!-- Item 3: Birthday -->
+            <div class="portfolio-item reveal" data-category="birthday">
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <img src="https://images.unsplash.com/photo-1530023367847-a683933f4172?auto=format&fit=crop&w=600&q=80" alt="Birthday Invitation" loading="lazy">
+                        <div class="rsvp-badge"><i class="fa-solid fa-check-circle"></i> RSVP Ready</div>
                     </div>
-                    <div class="form-group">
-                        <label>Will you attend?</label>
-                        <div class="radio-group">
-                            <div class="radio-item">
-                                <input type="radio" name="attendance" id="oo-yes" checked>
-                                <label for="oo-yes">Yes, definitely</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" name="attendance" id="oo-no">
-                                <label for="oo-no">Unfortunately, I can't</label>
-                            </div>
-                        </div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>Lemon Chello</h3>
+                    <div class="portfolio-price">$35</div>
+                    <div class="portfolio-buttons">
+                        <a href="#" class="btn-small btn-view">Preview</a>
+                        <a href="#" class="btn-small btn-order">Order</a>
                     </div>
-                    <div class="form-group">
-                        <label>Number of guests</label>
-                        <input type="number" placeholder="How many people?" min="1">
+                </div>
+            </div>
+
+            <!-- Item 4: Corporate -->
+            <div class="portfolio-item reveal" data-category="corporate">
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=600&q=80" alt="Corporate Event" loading="lazy">
+                        <div class="rsvp-badge"><i class="fa-solid fa-check-circle"></i> RSVP Ready</div>
                     </div>
-                    <button class="btn-submit">Send Response</button>
+                </div>
+                <div class="portfolio-info">
+                    <h3>Rose Gold Gala</h3>
+                    <div class="portfolio-price">$45</div>
+                    <div class="portfolio-buttons">
+                        <a href="#" class="btn-small btn-view">Preview</a>
+                        <a href="#" class="btn-small btn-order">Order</a>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Pearl & Lace -->
-        <div class="invitation-card" id="pearl-lace">
-            <div class="invitation-preview">
-                <div class="phone-frame">
-                    <div class="phone-screen">
-                        <div class="phone-notch"></div>
-                        <div class="pearl-lace">
-                            <div class="pl-header">
-                                <div class="pl-monogram">H & A</div>
-                                <div class="pl-couple-names">Hayk & Arpi</div>
-                                <div class="pl-date">July 22, 2026</div>
-                                <div class="pl-calendar">
-                                    <div class="pl-calendar-grid">
-                                        <div class="pl-calendar-day-header">M</div>
-                                        <div class="pl-calendar-day-header">T</div>
-                                        <div class="pl-calendar-day-header">W</div>
-                                        <div class="pl-calendar-day-header">T</div>
-                                        <div class="pl-calendar-day-header">F</div>
-                                        <div class="pl-calendar-day-header">S</div>
-                                        <div class="pl-calendar-day-header">S</div>
-                                        <div class="pl-calendar-day">20</div>
-                                        <div class="pl-calendar-day">21</div>
-                                        <div class="pl-calendar-day active">22</div>
-                                        <div class="pl-calendar-day">23</div>
-                                        <div class="pl-calendar-day">24</div>
-                                        <div class="pl-calendar-day">25</div>
-                                        <div class="pl-calendar-day">26</div>
-                                    </div>
-                                </div>
-                                <div style="margin-top: 20px; font-size: 0.9rem; color: #8B6F6F; line-height: 1.8;">
-                                    This is our special day,<br>
-                                    and we want to share it with you.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="section-header reveal">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">A seamless 4-step journey to your perfect digital invitation</p>
+        </div>
+        
+        <div class="process-grid">
+            <div class="process-step reveal">
+                <div class="step-number">1</div>
+                <h3>Choose Style</h3>
+                <p>Pick a template from our gallery or share your Pinterest board for a custom design.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="step-number">2</div>
+                <h3>Share Details</h3>
+                <p>Fill out our simple form with your names, date, venue, photos, and special notes.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="step-number">3</div>
+                <h3>We Design</h3>
+                <p>We craft your invitation and send a preview link for your review and feedback.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="step-number">4</div>
+                <h3>Send & Track</h3>
+                <p>Approve the final version, share the link via WhatsApp/Telegram, and track RSVPs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="section-header reveal">
+            <h2 class="section-title">Common Questions</h2>
+            <p class="section-subtitle">Everything you need to know before ordering</p>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    <span>How will I receive the guest RSVP responses?</span>
+                    <span class="faq-toggle"><i class="fa-solid fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>You have two convenient options: 1) Instant notifications sent directly to your Telegram or WhatsApp, or 2) A neatly organized spreadsheet delivered to your email address at the end of the day.</p>
                 </div>
             </div>
-            <div class="invitation-info">
-                <h2 style="font-size: 2rem; margin-bottom: 2rem; color: var(--text-dark);">Pearl & Lace</h2>
-                
-                <div class="info-section">
-                    <h3>Wedding Schedule</h3>
-                    <div class="info-item">
-                        <div class="info-icon"><i class="fa-solid fa-church"></i></div>
-                        <div class="info-content">
-                            <h4>Ceremony - 14:00</h4>
-                            <p>Holy Trinity Church<br>Yerevan, Bangladesh St.</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon"><i class="fa-solid fa-utensils"></i></div>
-                        <div class="info-content">
-                            <h4>Reception - 17:30</h4>
-                            <p>Adana Restaurant Complex<br>Acharyan St. 37, Yerevan</p>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="rsvp-form">
-                    <h3 style="margin-bottom: 1.5rem;">RSVP Form</h3>
-                    <div class="form-group">
-                        <label>Full Name</label>
-                        <input type="text" placeholder="Enter your name">
-                    </div>
-                    <div class="form-group">
-                        <label>Will you attend?</label>
-                        <div class="radio-group">
-                            <div class="radio-item">
-                                <input type="radio" name="attendance-pl" id="pl-yes" checked>
-                                <label for="pl-yes">Yes, I will come</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" name="attendance-pl" id="pl-no">
-                                <label for="pl-no">Unfortunately, I can't</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Invited by</label>
-                        <div class="radio-group">
-                            <div class="radio-item">
-                                <input type="radio" name="invited-by" id="pl-bride">
-                                <label for="pl-bride">Arpi</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" name="invited-by" id="pl-groom" checked>
-                                <label for="pl-groom">Hayk</label>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn-submit">Send Response</button>
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    <span>What is the payment structure?</span>
+                    <span class="faq-toggle"><i class="fa-solid fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>We use a secure 2-stage payment system: 50% advance payment to begin working on your invitation, and the remaining 50% only after you have reviewed and approved the final version.</p>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    <span>Can I make changes after the invitation is sent to guests?</span>
+                    <span class="faq-toggle"><i class="fa-solid fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! This is the beauty of digital invitations. If the venue changes or you need to update the timing, just let us know, and we will update the live link instantly without needing to resend anything.</p>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    <span>Do you provide music integration?</span>
+                    <span class="faq-toggle"><i class="fa-solid fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely. You can provide a link to your favorite song (Spotify, YouTube, or MP3), or choose from our curated library of elegant, royalty-free background music.</p>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Limon Chello -->
-        <div class="invitation-card" id="limon-chello">
-            <div class="invitation-preview">
-                <div class="phone-frame">
-                    <div class="phone-screen">
-                        <div class="phone-notch"></div>
-                        <div class="limon-chello">
-                            <div class="lc-header">
-                                <div class="lc-lemon"></div>
-                                <div class="lc-couple-names">Edmond & Edita</div>
-                                <div class="lc-event-type">Engagement</div>
-                                <div style="font-size: 0.95rem; color: #8B7355; line-height: 1.8; margin: 20px 0;">
-                                    Our love became a promise,<br>
-                                    and the promise - a new beginning.
-                                </div>
-                                <div class="lc-venue">
-                                    <div class="lc-venue-name">Villa Hills</div>
-                                    <div class="lc-venue-time">17:00</div>
-                                    <div style="margin-top: 10px; font-size: 0.85rem; color: #A0886F;">
-                                        Ptghni Village, 1st District<br>Kotayk Region
-                                    </div>
-                                </div>
-                                <div style="margin-top: 20px; font-size: 0.85rem; color: #C9B037;">
-                                    See on map →
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">WebInvitation</div>
+            <p>Crafting beautiful, stress-free digital experiences for your life's most cherished moments.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
             </div>
-            <div class="invitation-info">
-                <h2 style="font-size: 2rem; margin-bottom: 2rem; color: var(--text-dark);">Limon Chello</h2>
-                
-                <div class="info-section">
-                    <h3>Engagement Details</h3>
-                    <div class="info-item">
-                        <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
-                        <div class="info-content">
-                            <h4>Venue</h4>
-                            <p>Villa Hills<br>Ptghni Village, Kotayk Region</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon"><i class="fa-regular fa-clock"></i></div>
-                        <div class="info-content">
-                            <h4>Date & Time</h4>
-                            <p>August 7, 2026<br>17:00</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon"><i class="fa-solid fa-heart"></i></div>
-                        <div class="info-content">
-                            <h4>Special Note</h4>
-                            <p>I said Yes to my forever Love</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="rsvp-form">
-                    <h3 style="margin-bottom: 1.5rem;">RSVP Form</h3>
-                    <div class="form-group">
-                        <label>Full Name</label>
-                        <input type="text" placeholder="Enter your name">
-                    </div>
-                    <div class="form-group">
-                        <label>Will you attend?</label>
-                        <div class="radio-group">
-                            <div class="radio-item">
-                                <input type="radio" name="attendance-lc" id="lc-yes" checked>
-                                <label for="lc-yes">Yes, definitely</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" name="attendance-lc" id="lc-no">
-                                <label for="lc-no">Unfortunately, I can't</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Invited by</label>
-                        <div class="radio-group">
-                            <div class="radio-item">
-                                <input type="radio" name="invited-lc" id="lc-edmond">
-                                <label for="lc-edmond">Edmond</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" name="invited-lc" id="lc-edita" checked>
-                                <label for="lc-edita">Edita</label>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn-submit">Send Response</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Rose Gold Gala -->
-        <div class="invitation-card" id="rose-gold-gala">
-            <div class="invitation-preview">
-                <div class="phone-frame">
-                    <div class="phone-screen">
-                        <div class="phone-notch"></div>
-                        <div class="rose-gold-gala">
-                            <div class="rgg-header">
-                                <div class="rgg-crown">👑</div>
-                                <div class="rgg-decorative-line"></div>
-                                <div class="rgg-couple-names">Michael & Sarah</div>
-                                <div class="rgg-event-type">Corporate Gala</div>
-                                <div class="rgg-decorative-line"></div>
-                                <div style="font-size: 0.9rem; color: #8B6F6F; line-height: 1.8; margin: 20px 0;">
-                                    An elegant evening of<br>
-                                    celebration and networking<br>
-                                    for distinguished guests
-                                </div>
-                                <div class="rgg-gold-accent">
-                                    <div class="rgg-venue-name">Grand Ballroom</div>
-                                    <div class="rgg-time">19:00</div>
-                                    <div style="margin-top: 10px; font-size: 0.85rem; color: #8B6F6F;">
-                                        Marriott Hotel Yerevan<br>1 Grigor Lusavorich St.
-                                    </div>
-                                </div>
-                                <div class="rgg-countdown">
-                                    <div class="rgg-countdown-item">
-                                        <span class="rgg-countdown-number">25</span>
-                                        <span class="rgg-countdown-label">Days</span>
-                                    </div>
-                                    <div class="rgg-countdown-item">
-                                        <span class="rgg-countdown-number">08</span>
-                                        <span class="rgg-countdown-label">Hours</span>
-                                    </div>
-                                    <div class="rgg-countdown-item">
-                                        <span class="rgg-countdown-number">45</span>
-                                        <span class="rgg-countdown-label">Min</span>
-                                    </div>
-                                    <div class="rgg-countdown-item">
-                                        <span class="rgg-countdown-number">30</span>
-                                        <span class="rgg-countdown-label">Sec</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="invitation-info">
-                <h2 style="font-size: 2rem; margin-bottom: 2rem; color: var(--text-dark);">Rose Gold Gala</h2>
-                
-                <div class="info-section">
-                    <h3>Event Details</h3>
-                    <div class="info-item">
-                        <div class="info-icon"><i class="fa-solid fa-building"></i></div>
-                        <div class="info-content">
-                            <h4>Venue</h4>
-                            <p>Grand Ballroom, Marriott Hotel<br>1 Grigor Lusavorich St., Yerevan</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon"><i class="fa-regular fa-clock"></i></div>
-                        <div class="info-content">
-                            <h4>Date & Time</h4>
-                            <p>August 15, 2026<br>19:00 - 23:00</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon"><i class="fa-solid fa-shirt"></i></div>
-                        <div class="info-content">
-                            <h4>Dress Code</h4>
-                            <p>Black Tie / Formal Evening Wear</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon"><i class="fa-solid fa-calendar-check"></i></div>
-                        <div class="info-content">
-                            <h4>Program</h4>
-                            <p>19:00 - Welcome Reception<br>
-                            20:00 - Dinner & Awards<br>
-                            22:00 - Entertainment & Dancing</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="rsvp-form">
-                    <h3 style="margin-bottom: 1.5rem;">RSVP Form</h3>
-                    <div class="form-group">
-                        <label>Full Name</label>
-                        <input type="text" placeholder="Enter your name">
-                    </div>
-                    <div class="form-group">
-                        <label>Company</label>
-                        <input type="text" placeholder="Your company name">
-                    </div>
-                    <div class="form-group">
-                        <label>Will you attend?</label>
-                        <div class="radio-group">
-                            <div class="radio-item">
-                                <input type="radio" name="attendance-rgg" id="rgg-yes" checked>
-                                <label for="rgg-yes">Yes, I will attend</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" name="attendance-rgg" id="rgg-no">
-                                <label for="rgg-no">Unfortunately, I can't</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Number of guests</label>
-                        <input type="number" placeholder="How many people?" min="1" max="2">
-                    </div>
-                    <div class="form-group">
-                        <label>Dietary Requirements</label>
-                        <textarea rows="3" placeholder="Any special dietary needs?"></textarea>
-                    </div>
-                    <button class="btn-submit">Send Response</button>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <footer style="background: var(--text-dark); color: white; text-align: center; padding: 3rem 2rem; margin-top: 4rem;">
-        <div style="max-width: 600px; margin: 0 auto;">
-            <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 1rem;">WebInvitation</h3>
-            <p style="opacity: 0.8; margin-bottom: 2rem;">Creating beautiful digital invitations for your special moments</p>
-            <p style="opacity: 0.5; font-size: 0.9rem;">&copy; 2026 WebInvitation. All rights reserved.</p>
+            <p style="opacity: 0.5; font-size: 0.85rem; margin-top: 2rem;">&copy; 2026 WebInvitation. All rights reserved. Designed with elegance.</p>
         </div>
     </footer>
 
     <script>
-        // Countdown Timer Function
-        function startCountdown(selector, targetDate) {
-            const countdownElement = document.querySelector(selector);
-            
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const distance = targetDate - now;
-                
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                
-                const numberElements = countdownElement.querySelectorAll('.rgg-countdown-number, .oo-countdown-number');
-                if (numberElements.length >= 4) {
-                    numberElements[0].textContent = String(days).padStart(2, '0');
-                    numberElements[1].textContent = String(hours).padStart(2, '0');
-                    numberElements[2].textContent = String(minutes).padStart(2, '0');
-                    numberElements[3].textContent = String(seconds).padStart(2, '0');
-                }
-            }
-            
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
         }
 
-        // Initialize countdowns
-        const futureDate = new Date();
-        futureDate.setDate(futureDate.getDate() + 16);
-        startCountdown('.olive-orchid .oo-countdown', futureDate);
-        startCountdown('.rose-gold-gala .rgg-countdown', futureDate);
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 80;
+            
+            revealElements.forEach((element) => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        };
 
-        // Smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Trigger on load
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                if (!isActive) {
+                    faqItem.classList.add('active');
                 }
             });
         });
-    </script>
 
+        // Portfolio Filter with Animation
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filterValue = btn.getAttribute('data-filter');
+                
+                portfolioItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.classList.remove('hidden');
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            item.classList.add('hidden');
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.05)';
+                nav.style.background = 'rgba(250, 249, 246, 0.95)';
+            } else {
+                nav.style.boxShadow = 'none';
+                nav.style.background = 'rgba(250, 249, 246, 0.9)';
+            }
+        });
+    </script>
 </body>
 </html>
