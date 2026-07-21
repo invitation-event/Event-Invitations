@@ -3,46 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Invitation - Electronic Invitations | Your Event in One Link</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>WebInvitation | Elegant Digital Invitations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #E5989B;
+            --secondary: #B5838D;
+            --accent: #FFB4A2;
+            --gold: #D4A373;
+            --bg: #FAF3F0;
+            --white: #FFFFFF;
+            --text-dark: #2C3E50;
+            --text-light: #6B7280;
+            --shadow: 0 10px 40px rgba(229, 152, 155, 0.15);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-color: #D4A5A5;
-            --secondary-color: #9B8AA5;
-            --accent-color: #E8D5D5;
-            --text-dark: #4A4A4A;
-            --text-light: #777777;
-            --bg-cream: #FDF8F5;
-            --white: #FFFFFF;
-            --gold: #C9B896;
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
             color: var(--text-dark);
-            line-height: 1.6;
-            background-color: var(--bg-cream);
+            background-color: var(--bg);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
 
         h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif;
         }
 
+        /* Animated Background Blobs */
+        .bg-blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: float 10s infinite ease-in-out;
+        }
+        .blob-1 { width: 400px; height: 400px; background: var(--accent); top: -100px; right: -100px; }
+        .blob-2 { width: 300px; height: 300px; background: var(--primary); bottom: 10%; left: -50px; animation-delay: 2s; }
+        .blob-3 { width: 250px; height: 250px; background: var(--gold); top: 40%; right: 10%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(20px, -30px) scale(1.1); }
+        }
+
         /* Navigation */
         nav {
-            background: var(--white);
-            padding: 1.5rem 5%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 1.2rem 5%;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+            transition: all 0.3s;
         }
 
         .nav-container {
@@ -56,14 +83,17 @@
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
-            color: var(--primary-color);
-            font-weight: 600;
+            color: var(--secondary);
+            font-weight: 700;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
@@ -71,175 +101,246 @@
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
             transition: color 0.3s;
         }
 
-        .nav-links a:hover {
-            color: var(--primary-color);
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
         }
 
         /* Hero Section */
         .hero {
             margin-top: 80px;
-            padding: 6rem 5%;
-            background: linear-gradient(135deg, var(--bg-cream) 0%, var(--accent-color) 100%);
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            padding: 4rem 5%;
+            position: relative;
+            background: linear-gradient(135deg, rgba(250, 243, 240, 0.9), rgba(255, 180, 162, 0.2)), 
+                        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: var(--shadow);
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             color: var(--text-dark);
             margin-bottom: 1rem;
-            font-weight: 600;
+            line-height: 1.2;
         }
 
         .hero .subtitle {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .hero .tagline {
             font-size: 1.1rem;
-            color: var(--secondary-color);
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
             max-width: 600px;
-            margin: 0 auto 2rem;
-        }
-
-        .hero .special-text {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            color: var(--gold);
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .btn {
             display: inline-block;
             padding: 1rem 2.5rem;
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: var(--white);
             text-decoration: none;
             border-radius: 50px;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.3s;
-            border: 2px solid var(--primary-color);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(229, 152, 155, 0.4);
         }
 
         .btn:hover {
-            background: transparent;
-            color: var(--primary-color);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(229, 152, 155, 0.6);
         }
 
         .btn-outline {
             background: transparent;
-            color: var(--primary-color);
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+            box-shadow: none;
             margin-left: 1rem;
         }
 
         .btn-outline:hover {
-            background: var(--primary-color);
+            background: var(--secondary);
             color: var(--white);
+            transform: translateY(-3px);
         }
 
         /* Section Styles */
         section {
-            padding: 5rem 5%;
+            padding: 6rem 5%;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
             color: var(--text-dark);
-            position: relative;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 4rem;
+            font-size: 1.1rem;
         }
 
         .section-title::after {
-            content: '';
+            content: '✦';
             display: block;
-            width: 80px;
-            height: 3px;
-            background: var(--primary-color);
-            margin: 1rem auto;
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Services Section */
-        .services {
-            background: var(--white);
-        }
-
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
 
         .service-card {
-            background: var(--bg-cream);
-            padding: 2.5rem;
-            border-radius: 15px;
-            transition: transform 0.3s;
-            border: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.8);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+            transform: scaleX(0);
+            transition: transform 0.4s;
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-color);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            background: rgba(255, 255, 255, 0.95);
         }
 
-        .service-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
         }
 
         .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
             color: var(--text-dark);
         }
 
         .service-card ul {
             list-style: none;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .service-card ul li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
+            padding: 0.6rem 0;
+            padding-left: 1.8rem;
             position: relative;
             color: var(--text-light);
+            font-size: 0.95rem;
         }
 
         .service-card ul li::before {
-            content: '✦';
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
             position: absolute;
             left: 0;
             color: var(--gold);
         }
 
-        .service-footer {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--accent-color);
+        .price-tag {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 0.5rem;
         }
 
-        .price {
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .time {
+        .time-tag {
             color: var(--text-light);
             font-size: 0.9rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         /* Portfolio Section */
@@ -252,11 +353,11 @@
         }
 
         .filter-btn {
-            padding: 0.6rem 1.5rem;
+            padding: 0.7rem 1.8rem;
             background: transparent;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            border-radius: 25px;
+            border: 2px solid var(--primary);
+            color: var(--secondary);
+            border-radius: 50px;
             cursor: pointer;
             font-family: 'Poppins', sans-serif;
             font-weight: 500;
@@ -265,8 +366,9 @@
 
         .filter-btn.active,
         .filter-btn:hover {
-            background: var(--primary-color);
+            background: var(--primary);
             color: var(--white);
+            border-color: var(--primary);
         }
 
         .portfolio-grid {
@@ -277,127 +379,180 @@
 
         .portfolio-item {
             background: var(--white);
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.4s;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .portfolio-item.hidden {
+            display: none;
         }
 
         .portfolio-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
         }
 
         .portfolio-image {
-            height: 350px;
-            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            height: 320px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .portfolio-item:hover .portfolio-image img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(181, 131, 141, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--white);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
         }
 
         .portfolio-info {
             padding: 1.5rem;
+            text-align: center;
         }
 
         .portfolio-info h3 {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 0.5rem;
+            color: var(--text-dark);
         }
 
         .portfolio-price {
-            color: var(--primary-color);
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
         }
 
         .portfolio-buttons {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.8rem;
+            justify-content: center;
         }
 
         .btn-small {
             flex: 1;
-            padding: 0.7rem;
+            padding: 0.8rem;
             text-align: center;
-            border-radius: 8px;
+            border-radius: 10px;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.9rem;
             transition: all 0.3s;
         }
 
         .btn-view {
-            background: var(--accent-color);
+            background: var(--bg);
             color: var(--text-dark);
         }
 
         .btn-view:hover {
-            background: var(--primary-color);
+            background: var(--accent);
             color: var(--white);
         }
 
         .btn-order {
-            background: var(--primary-color);
+            background: var(--primary);
             color: var(--white);
         }
 
         .btn-order:hover {
-            background: var(--secondary-color);
+            background: var(--secondary);
         }
 
         /* Process Section */
         .process {
-            background: var(--white);
+            background: rgba(255,255,255,0.5);
+            border-radius: 30px;
+            margin: 4rem auto;
         }
 
         .process-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
+            position: relative;
         }
 
         .process-step {
             text-align: center;
-            padding: 2rem;
+            padding: 2rem 1rem;
             position: relative;
         }
 
         .step-number {
-            width: 60px;
-            height: 60px;
-            background: var(--primary-color);
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             color: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
             margin: 0 auto 1.5rem;
+            box-shadow: 0 5px 20px rgba(229, 152, 155, 0.4);
+            position: relative;
+            z-index: 2;
         }
 
         .process-step h3 {
             font-size: 1.2rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             color: var(--text-dark);
         }
 
         .process-step p {
             color: var(--text-light);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
         }
 
         /* FAQ Section */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
         .faq-item {
             background: var(--white);
             margin-bottom: 1rem;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.02);
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow);
         }
 
         .faq-question {
@@ -406,35 +561,46 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 500;
+            font-weight: 600;
+            color: var(--text-dark);
             transition: background 0.3s;
         }
 
         .faq-question:hover {
-            background: var(--bg-cream);
+            background: rgba(229, 152, 155, 0.05);
         }
 
         .faq-answer {
             padding: 0 1.5rem;
             max-height: 0;
             overflow: hidden;
-            transition: all 0.3s;
+            transition: all 0.4s ease;
             color: var(--text-light);
+            line-height: 1.8;
         }
 
         .faq-item.active .faq-answer {
             padding: 0 1.5rem 1.5rem;
-            max-height: 500px;
+            max-height: 300px;
         }
 
         .faq-toggle {
-            font-size: 1.5rem;
-            color: var(--primary-color);
+            font-size: 1.2rem;
+            color: var(--primary);
             transition: transform 0.3s;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(229, 152, 155, 0.1);
         }
 
         .faq-item.active .faq-toggle {
             transform: rotate(45deg);
+            background: var(--primary);
+            color: var(--white);
         }
 
         /* Footer */
@@ -442,156 +608,226 @@
             background: var(--text-dark);
             color: var(--white);
             text-align: center;
-            padding: 2rem;
+            padding: 3rem 2rem;
             margin-top: 4rem;
+            position: relative;
         }
 
-        footer p {
-            opacity: 0.8;
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: var(--text-dark);
+            clip-path: ellipse(60% 100% at 50% 100%);
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
+            .hero h1 { font-size: 2.5rem; }
             .nav-links {
-                display: none;
-            }
-
-            .btn-outline {
-                margin-left: 0;
-                margin-top: 1rem;
-            }
-
-            .hero .buttons {
-                display: flex;
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(255,255,255,0.98);
+                backdrop-filter: blur(10px);
                 flex-direction: column;
                 align-items: center;
+                padding-top: 3rem;
+                transition: right 0.3s;
             }
+            .nav-links.active { right: 0; }
+            .mobile-menu-btn { display: block; }
+            .btn-outline { margin-left: 0; margin-top: 1rem; display: block; }
+            .hero .buttons { display: flex; flex-direction: column; align-items: center; }
+            .section-title { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Animated Background -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="#" class="logo">WebInvitation</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#process">Process</a></li>
-                <li><a href="#faq">FAQ</a></li>
+            <a href="#" class="logo"><i class="fa-solid fa-envelope-open-text"></i> WebInvitation</a>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+                <li><a href="#services" onclick="toggleMenu()">Services</a></li>
+                <li><a href="#portfolio" onclick="toggleMenu()">Portfolio</a></li>
+                <li><a href="#process" onclick="toggleMenu()">Process</a></li>
+                <li><a href="#faq" onclick="toggleMenu()">FAQ</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <h1>Electronic Invitations</h1>
-        <p class="subtitle">Your Event in One Link</p>
-        <p class="tagline">This is the perfect solution for those who want to make the guest invitation process simple and stylish. Just send the link, and your guests will receive all the event details.</p>
-        <p class="special-text">For special happy moments</p>
-        <div class="buttons">
-            <a href="#portfolio" class="btn">View Invitations</a>
-            <a href="#services" class="btn btn-outline">Our Services</a>
+        <div class="hero-content reveal">
+            <p class="subtitle">Your Event in One Link</p>
+            <h1>Elegant Digital Invitations</h1>
+            <p class="tagline">Make your guest invitation process simple, stylish, and unforgettable. Just send the link, and your guests will receive all the event details beautifully.</p>
+            <div class="buttons">
+                <a href="#portfolio" class="btn">View Designs</a>
+                <a href="#services" class="btn btn-outline">Our Services</a>
+            </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section class="services" id="services">
-        <h2 class="section-title">Invitation Options</h2>
+    <section id="services">
+        <h2 class="section-title reveal">Invitation Options</h2>
+        <p class="section-subtitle reveal">Choose the perfect style for your special day</p>
+        
         <div class="services-grid">
-            <div class="service-card">
-                <div class="service-number">/01</div>
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
                 <h3>Template Design</h3>
                 <ul>
-                    <li>Remove or add necessary blocks (e.g., Dress code, Timing, guest wishes, contacts, etc.)</li>
-                    <li>Change texts, dates, names, photos, and dress code</li>
-                    <li>Add or remove music</li>
+                    <li>Customize existing elegant templates</li>
+                    <li>Add/remove blocks (Dress code, Timing, Maps)</li>
+                    <li>Update texts, dates, names & photos</li>
+                    <li>Add your favorite background music</li>
                 </ul>
-                <div class="service-footer">
-                    <div class="time"> Production: 1–2 days</div>
-                    <div class="price">Starting from $18</div>
-                    <a href="#" class="btn" style="width: 100%; text-align: center;">Order Now</a>
-                </div>
+                <div class="time-tag"><i class="fa-regular fa-clock"></i> Production: 1–2 days</div>
+                <div class="price-tag">From $18</div>
+                <a href="#portfolio" class="btn" style="width: 100%; text-align: center; margin-top: 1rem;">Choose Template</a>
             </div>
 
-            <div class="service-card">
-                <div class="service-number">/02</div>
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="fa-solid fa-pen-nib"></i></div>
                 <h3>Custom Design</h3>
                 <ul>
-                    <li>Develop overall concept based on your references</li>
-                    <li>Dress code, Timing, fonts, photos, and text selection</li>
-                    <li>Integration of guest questionnaire</li>
+                    <li>Unique concept based on your references</li>
+                    <li>Custom color palette, fonts & illustrations</li>
+                    <li>Interactive guest RSVP questionnaire</li>
+                    <li>Priority support & unlimited revisions</li>
                 </ul>
-                <div class="service-footer">
-                    <div class="time">⏱ Production: 3–5 days</div>
-                    <div class="price">Starting from $38</div>
-                    <a href="#" class="btn" style="width: 100%; text-align: center;">Order Now</a>
-                </div>
+                <div class="time-tag"><i class="fa-regular fa-clock"></i> Production: 3–5 days</div>
+                <div class="price-tag">From $38</div>
+                <a href="#portfolio" class="btn" style="width: 100%; text-align: center; margin-top: 1rem;">Start Custom</a>
             </div>
         </div>
     </section>
 
     <!-- Portfolio Section -->
     <section id="portfolio">
-        <h2 class="section-title">Invitation Samples</h2>
-        <div class="filter-buttons">
-            <button class="filter-btn active">All</button>
-            <button class="filter-btn">Wedding</button>
-            <button class="filter-btn">Birthday</button>
-            <button class="filter-btn">Corporate</button>
-            <button class="filter-btn">Kids</button>
+        <h2 class="section-title reveal">Our Portfolio</h2>
+        <p class="section-subtitle reveal">Browse through our latest beautiful designs</p>
+        
+        <div class="filter-buttons reveal">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="wedding">Wedding</button>
+            <button class="filter-btn" data-filter="birthday">Birthday</button>
+            <button class="filter-btn" data-filter="corporate">Corporate</button>
         </div>
+
         <div class="portfolio-grid">
-            <div class="portfolio-item">
-                <div class="portfolio-image">Olive & Orchid</div>
+            <div class="portfolio-item reveal" data-category="wedding">
+                <div class="portfolio-image">
+                    <img src="https://images.unsplash.com/photo-1607190074257-dd4b76e05d9a?auto=format&fit=crop&w=600&q=80" alt="Wedding Invitation" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <a href="#" class="btn" style="padding: 0.8rem 1.5rem; font-size: 0.9rem;">Preview</a>
+                    </div>
+                </div>
                 <div class="portfolio-info">
-                    <h3>Olive and Orchid</h3>
+                    <h3>Olive & Orchid</h3>
                     <div class="portfolio-price">$38</div>
                     <div class="portfolio-buttons">
-                        <a href="#" class="btn-small btn-view">View</a>
-                        <a href="#" class="btn-small btn-order">Order</a>
+                        <a href="#" class="btn-small btn-view">Details</a>
+                        <a href="#" class="btn-small btn-order">Order Now</a>
                     </div>
                 </div>
             </div>
 
-            <div class="portfolio-item">
-                <div class="portfolio-image">Pearl & Lace</div>
+            <div class="portfolio-item reveal" data-category="wedding">
+                <div class="portfolio-image">
+                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80" alt="Elegant Invitation" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <a href="#" class="btn" style="padding: 0.8rem 1.5rem; font-size: 0.9rem;">Preview</a>
+                    </div>
+                </div>
                 <div class="portfolio-info">
-                    <h3>Pearl and Lace</h3>
+                    <h3>Pearl & Lace</h3>
                     <div class="portfolio-price">$40</div>
                     <div class="portfolio-buttons">
-                        <a href="#" class="btn-small btn-view">View</a>
-                        <a href="#" class="btn-small btn-order">Order</a>
+                        <a href="#" class="btn-small btn-view">Details</a>
+                        <a href="#" class="btn-small btn-order">Order Now</a>
                     </div>
                 </div>
             </div>
 
-            <div class="portfolio-item">
-                <div class="portfolio-image">Lemon Chello</div>
+            <div class="portfolio-item reveal" data-category="birthday">
+                <div class="portfolio-image">
+                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=600&q=80" alt="Birthday Invitation" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <a href="#" class="btn" style="padding: 0.8rem 1.5rem; font-size: 0.9rem;">Preview</a>
+                    </div>
+                </div>
                 <div class="portfolio-info">
                     <h3>Lemon Chello</h3>
-                    <div class="portfolio-price">$40</div>
+                    <div class="portfolio-price">$35</div>
                     <div class="portfolio-buttons">
-                        <a href="#" class="btn-small btn-view">View</a>
-                        <a href="#" class="btn-small btn-order">Order</a>
+                        <a href="#" class="btn-small btn-view">Details</a>
+                        <a href="#" class="btn-small btn-order">Order Now</a>
                     </div>
                 </div>
             </div>
 
-            <div class="portfolio-item">
-                <div class="portfolio-image">Rose Gold</div>
+            <div class="portfolio-item reveal" data-category="corporate">
+                <div class="portfolio-image">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=600&q=80" alt="Corporate Event" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <a href="#" class="btn" style="padding: 0.8rem 1.5rem; font-size: 0.9rem;">Preview</a>
+                    </div>
+                </div>
                 <div class="portfolio-info">
-                    <h3>Rose Gold Elegance</h3>
-                    <div class="portfolio-price">$42</div>
+                    <h3>Rose Gold Gala</h3>
+                    <div class="portfolio-price">$45</div>
                     <div class="portfolio-buttons">
-                        <a href="#" class="btn-small btn-view">View</a>
-                        <a href="#" class="btn-small btn-order">Order</a>
+                        <a href="#" class="btn-small btn-view">Details</a>
+                        <a href="#" class="btn-small btn-order">Order Now</a>
                     </div>
                 </div>
             </div>
@@ -600,151 +836,181 @@
 
     <!-- Process Section -->
     <section class="process" id="process">
-        <h2 class="section-title">Workflow Steps</h2>
+        <h2 class="section-title reveal">How It Works</h2>
+        <p class="section-subtitle reveal">Simple 4-step process to your perfect invitation</p>
+        
         <div class="process-grid">
-            <div class="process-step">
-                <div class="step-number">01</div>
-                <h3>Choose Invitation Design</h3>
-                <p>Select a ready-made or custom design. You can order through the website or write to our Instagram page.</p>
+            <div class="process-step reveal">
+                <div class="step-number">1</div>
+                <h3>Choose Design</h3>
+                <p>Select a ready-made template or request a custom design via our form.</p>
             </div>
-
-            <div class="process-step">
-                <div class="step-number">02</div>
-                <h3>Information Collection</h3>
-                <p>Fill out the questionnaire we provide about your event.</p>
+            <div class="process-step reveal">
+                <div class="step-number">2</div>
+                <h3>Share Details</h3>
+                <p>Fill out a simple questionnaire with your event info, names, and photos.</p>
             </div>
-
-            <div class="process-step">
-                <div class="step-number">03</div>
-                <h3>Invitation Creation</h3>
-                <p>Template design: 1–2 days, Custom design: 3–5 days.</p>
+            <div class="process-step reveal">
+                <div class="step-number">3</div>
+                <h3>We Create</h3>
+                <p>Our designers craft your invitation (1-2 days for template, 3-5 for custom).</p>
             </div>
-
-            <div class="process-step">
-                <div class="step-number">04</div>
-                <h3>Approval</h3>
-                <p>We send the finished version, make necessary changes. After final approval, payment is made.</p>
-            </div>
-
-            <div class="process-step">
-                <div class="step-number">05</div>
-                <h3>Ready Invitation</h3>
-                <p>Receive the final link and send it to your guests.</p>
+            <div class="process-step reveal">
+                <div class="step-number">4</div>
+                <h3>Send & Enjoy</h3>
+                <p>Approve the final version, make payment, and share the link with guests!</p>
             </div>
         </div>
     </section>
 
     <!-- FAQ Section -->
     <section id="faq">
-        <h2 class="section-title">Frequently Asked Questions</h2>
+        <h2 class="section-title reveal">Frequently Asked Questions</h2>
+        <p class="section-subtitle reveal">Everything you need to know</p>
         
-        <div class="faq-item">
-            <div class="faq-question">
-                <span>How will I receive the filled guest data?</span>
-                <span class="faq-toggle">+</span>
+        <div class="faq-container">
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    <span>How will I receive the guest RSVP data?</span>
+                    <span class="faq-toggle"><i class="fa-solid fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>You can choose your preferred method: 1) Instant notifications to your Telegram or WhatsApp, or 2) A compiled spreadsheet sent to your email address.</p>
+                </div>
             </div>
-            <div class="faq-answer">
-                <p>There are 2 options:</p>
-                <p>1) You receive it via your specified Telegram or WhatsApp</p>
-                <p>2) You receive applications to your email address</p>
-            </div>
-        </div>
 
-        <div class="faq-item">
-            <div class="faq-question">
-                <span>How does payment work?</span>
-                <span class="faq-toggle">+</span>
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    <span>How does the payment process work?</span>
+                    <span class="faq-toggle"><i class="fa-solid fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Payment is split into two stages for your convenience: 50% advance payment to start the work, and the remaining 50% after you approve the final version of your invitation.</p>
+                </div>
             </div>
-            <div class="faq-answer">
-                <p>Payment is made in 2 stages — 50% in advance, 50% after confirming the final version.</p>
-            </div>
-        </div>
 
-        <div class="faq-item">
-            <div class="faq-question">
-                <span>Can I order a custom design?</span>
-                <span class="faq-toggle">+</span>
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    <span>Can I request a completely custom design?</span>
+                    <span class="faq-toggle"><i class="fa-solid fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely! You can share links from Pinterest, Instagram, or any other source. Our designers will create a unique concept tailored to your vision starting at $38.</p>
+                </div>
             </div>
-            <div class="faq-answer">
-                <p>Yes, you can send links from Pinterest or Google. Custom design pricing starts from $38. Timeline: 3-5 days.</p>
-            </div>
-        </div>
 
-        <div class="faq-item">
-            <div class="faq-question">
-                <span>Can I add music to my invitation?</span>
-                <span class="faq-toggle">+</span>
-            </div>
-            <div class="faq-answer">
-                <p>Yes! You can add your favorite song or choose from our music library. You can also remove music if you prefer.</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">
-                <span>Can I update information after the invitation is created?</span>
-                <span class="faq-toggle">+</span>
-            </div>
-            <div class="faq-answer">
-                <p>Yes, minor changes can be made even after the invitation is completed. Contact us for any updates you need.</p>
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    <span>Can I change details after the invitation is published?</span>
+                    <span class="faq-toggle"><i class="fa-solid fa-plus"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! One of the biggest advantages of digital invitations is flexibility. Minor text or time changes can be made even after the link has been sent to guests.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 WebInvitation. All rights reserved.</p>
-        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Creating beautiful digital invitations for your special moments</p>
+        <div class="footer-content">
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 1rem;">WebInvitation</h3>
+            <p>Creating beautiful, stress-free digital invitations for your most special moments.</p>
+            <div class="social-links">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#"><i class="fa-regular fa-envelope"></i></a>
+            </div>
+            <p style="opacity: 0.6; font-size: 0.9rem; margin-top: 2rem;">&copy; 2026 WebInvitation. All rights reserved.</p>
+        </div>
     </footer>
 
     <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 100;
+            
+            revealElements.forEach((element) => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        // Trigger once on load
+        revealOnScroll();
+
         // FAQ Accordion
         document.querySelectorAll('.faq-question').forEach(question => {
             question.addEventListener('click', () => {
                 const faqItem = question.parentElement;
                 const isActive = faqItem.classList.contains('active');
                 
-                // Close all FAQ items
+                // Close all
                 document.querySelectorAll('.faq-item').forEach(item => {
                     item.classList.remove('active');
                 });
                 
-                // Open clicked item if it wasn't active
+                // Open clicked if it wasn't active
                 if (!isActive) {
                     faqItem.classList.add('active');
                 }
             });
         });
 
-        // Filter Buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
+        // Portfolio Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
                 btn.classList.add('active');
+                
+                const filterValue = btn.getAttribute('data-filter');
+                
+                portfolioItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.classList.remove('hidden');
+                        // Small timeout to allow display:block to apply before opacity transition
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            item.classList.add('hidden');
+                        }, 300);
+                    }
+                });
             });
         });
 
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Navbar Scroll Effect
+        // Navbar background on scroll
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
             } else {
-                nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+                nav.style.boxShadow = 'none';
+                nav.style.background = 'rgba(255, 255, 255, 0.85)';
             }
         });
     </script>
