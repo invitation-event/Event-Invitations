@@ -69,6 +69,7 @@
             display: flex;
             gap: 2rem;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
@@ -96,6 +97,33 @@
 
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        /* Language Switcher */
+        .lang-switcher {
+            display: flex;
+            gap: 0.5rem;
+            background: var(--light-bg);
+            padding: 0.5rem;
+            border-radius: 25px;
+            border: 2px solid var(--primary-color);
+        }
+
+        .lang-btn {
+            padding: 0.4rem 1rem;
+            border: none;
+            background: transparent;
+            color: var(--text-dark);
+            cursor: pointer;
+            border-radius: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: var(--primary-color);
+            color: white;
         }
 
         /* Hero Section */
@@ -318,67 +346,66 @@
             transform: scale(1.05);
         }
 
-        /* Video Section */
-        .video-section {
+        /* Chef Story Section */
+        .chef-story {
             background: var(--secondary-color);
             padding: 5rem 5%;
             margin-top: 3rem;
-        }
-
-        .video-section .section-title {
             color: white;
         }
 
-        .video-section .section-subtitle {
+        .chef-story .section-title {
+            color: white;
+        }
+
+        .chef-story .section-subtitle {
             color: rgba(255,255,255,0.8);
         }
 
-        .video-container {
-            max-width: 1000px;
+        .chef-content {
+            max-width: 1200px;
             margin: 0 auto;
-            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .chef-image {
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
-        .video-container video,
-        .video-container iframe {
+        .chef-image img {
             width: 100%;
-            display: block;
-        }
-
-        .video-placeholder {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            position: relative;
+            object-fit: cover;
+            transition: transform 0.5s;
         }
 
-        .play-button {
-            width: 100px;
-            height: 100px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        .chef-image:hover img {
+            transform: scale(1.05);
         }
 
-        .play-button i {
-            font-size: 3rem;
+        .chef-text h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
             color: var(--primary-color);
-            margin-left: 10px;
         }
 
-        .play-button:hover {
-            transform: scale(1.1);
-            background: white;
+        .chef-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .chef-signature {
+            font-style: italic;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-top: 2rem;
         }
 
         /* Gallery Section */
@@ -496,6 +523,11 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
+            .chef-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
             .nav-links {
                 display: none;
             }
@@ -553,11 +585,17 @@
         <div class="nav-container">
             <a href="#" class="logo">Gourmet<span>Delights</span></a>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#menu">Menu</a></li>
-                <li><a href="#video">Video</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home" data-en="Home" data-am="Գլdelays">Home</a></li>
+                <li><a href="#menu" data-en="Menu" data-am="Մdelays">Menu</a></li>
+                <li><a href="#chef" data-en="Our Chef" data-am="Մdelays Մdelays">Our Chef</a></li>
+                <li><a href="#gallery" data-en="Gallery" data-am="Պdelays">Gallery</a></li>
+                <li><a href="#contact" data-en="Contact" data-am="Կdelays">Contact</a></li>
+                <li>
+                    <div class="lang-switcher">
+                        <button class="lang-btn active" data-lang="en">EN</button>
+                        <button class="lang-btn" data-lang="am">ՀԱՅ</button>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>
@@ -565,23 +603,23 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>Exquisite Culinary Experience</h1>
-            <p>Savor the art of fine dining with our carefully crafted dishes</p>
-            <a href="#menu" class="cta-button">Explore Our Menu</a>
+            <h1 data-en="Exquisite Culinary Experience" data-am="Հdelays Հdelays Հdelays">Exquisite Culinary Experience</h1>
+            <p data-en="Savor the art of fine dining with our carefully crafted dishes" data-am="Վdelays delays delays delays delays delays">Savor the art of fine dining with our carefully crafted dishes</p>
+            <a href="#menu" class="cta-button" data-en="Explore Our Menu" data-am="Ուdelays delays delays">Explore Our Menu</a>
         </div>
     </section>
 
     <!-- Menu Section -->
     <section id="menu">
-        <h2 class="section-title">Our Menu</h2>
-        <p class="section-subtitle">Discover our signature dishes prepared with passion and precision</p>
+        <h2 class="section-title" data-en="Our Menu" data-am="Մdelays Մdelays">Our Menu</h2>
+        <p class="section-subtitle" data-en="Discover our signature dishes prepared with passion and precision" data-am="Բdelays delays delays delays delays delays delays">Discover our signature dishes prepared with passion and precision</p>
 
         <div class="menu-categories">
-            <button class="category-btn active" data-category="all">All</button>
-            <button class="category-btn" data-category="appetizers">Appetizers</button>
-            <button class="category-btn" data-category="mains">Main Course</button>
-            <button class="category-btn" data-category="desserts">Desserts</button>
-            <button class="category-btn" data-category="beverages">Beverages</button>
+            <button class="category-btn active" data-category="all" data-en="All" data-am="Բdelays">All</button>
+            <button class="category-btn" data-category="appetizers" data-en="Appetizers" data-am="Նdelays">Appetizers</button>
+            <button class="category-btn" data-category="mains" data-en="Main Course" data-am="Հdelays delays">Main Course</button>
+            <button class="category-btn" data-category="desserts" data-en="Desserts" data-am="Անdelays">Desserts</button>
+            <button class="category-btn" data-category="beverages" data-en="Beverages" data-am="Խdelays">Beverages</button>
         </div>
 
         <div class="menu-grid">
@@ -589,12 +627,12 @@
             <div class="menu-item" data-category="appetizers">
                 <div class="menu-item-image">
                     <img src="https://images.unsplash.com/photo-1541529086526-db283c563270?w=800" alt="Bruschetta">
-                    <span class="menu-badge">Popular</span>
+                    <span class="menu-badge" data-en="Popular" data-am="Հdelays">Popular</span>
                 </div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
                         <div>
-                            <h3 class="menu-item-title">Classic Bruschetta</h3>
+                            <h3 class="menu-item-title" data-en="Classic Bruschetta" data-am="Դdelays delays">Classic Bruschetta</h3>
                             <div class="rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -605,10 +643,10 @@
                         </div>
                         <span class="menu-item-price">$12</span>
                     </div>
-                    <p class="menu-item-description">Toasted bread topped with fresh tomatoes, basil, garlic, and extra virgin olive oil. A taste of Italy in every bite.</p>
+                    <p class="menu-item-description" data-en="Toasted bread topped with fresh tomatoes, basil, garlic, and extra virgin olive oil. A taste of Italy in every bite." data-am="Հdelays delays delays delays delays delays delays delays delays">Toasted bread topped with fresh tomatoes, basil, garlic, and extra virgin olive oil. A taste of Italy in every bite.</p>
                     <div class="menu-item-footer">
                         <span><i class="fas fa-clock"></i> 15 min</span>
-                        <button class="order-btn" onclick="orderItem('Classic Bruschetta')">Order Now</button>
+                        <button class="order-btn" onclick="orderItem('Classic Bruschetta')" data-en="Order Now" data-am="Պdelays">Order Now</button>
                     </div>
                 </div>
             </div>
@@ -617,12 +655,12 @@
             <div class="menu-item" data-category="mains">
                 <div class="menu-item-image">
                     <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800" alt="Grilled Steak">
-                    <span class="menu-badge">Chef's Special</span>
+                    <span class="menu-badge" data-en="Chef's Special" data-am="Շdelays delays">Chef's Special</span>
                 </div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
                         <div>
-                            <h3 class="menu-item-title">Premium Ribeye Steak</h3>
+                            <h3 class="menu-item-title" data-en="Premium Ribeye Steak" data-am="Պdelays delays delays">Premium Ribeye Steak</h3>
                             <div class="rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -633,10 +671,10 @@
                         </div>
                         <span class="menu-item-price">$45</span>
                     </div>
-                    <p class="menu-item-description">Prime aged ribeye grilled to perfection, served with truffle mashed potatoes and seasonal vegetables.</p>
+                    <p class="menu-item-description" data-en="Prime aged ribeye grilled to perfection, served with truffle mashed potatoes and seasonal vegetables." data-am="Իdelays delays delays delays delays delays delays delays delays delays">Prime aged ribeye grilled to perfection, served with truffle mashed potatoes and seasonal vegetables.</p>
                     <div class="menu-item-footer">
                         <span><i class="fas fa-clock"></i> 35 min</span>
-                        <button class="order-btn" onclick="orderItem('Premium Ribeye Steak')">Order Now</button>
+                        <button class="order-btn" onclick="orderItem('Premium Ribeye Steak')" data-en="Order Now" data-am="Պdelays">Order Now</button>
                     </div>
                 </div>
             </div>
@@ -649,7 +687,7 @@
                 <div class="menu-item-content">
                     <div class="menu-item-header">
                         <div>
-                            <h3 class="menu-item-title">Mediterranean Seafood Pasta</h3>
+                            <h3 class="menu-item-title" data-en="Mediterranean Seafood Pasta" data-am="Մdelays delays delays">Mediterranean Seafood Pasta</h3>
                             <div class="rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -660,10 +698,10 @@
                         </div>
                         <span class="menu-item-price">$32</span>
                     </div>
-                    <p class="menu-item-description">Fresh linguine with prawns, mussels, clams in a white wine garlic sauce with cherry tomatoes.</p>
+                    <p class="menu-item-description" data-en="Fresh linguine with prawns, mussels, clams in a white wine garlic sauce with cherry tomatoes." data-am="Թdelays delays delays delays delays delays delays delays delays delays">Fresh linguine with prawns, mussels, clams in a white wine garlic sauce with cherry tomatoes.</p>
                     <div class="menu-item-footer">
                         <span><i class="fas fa-clock"></i> 25 min</span>
-                        <button class="order-btn" onclick="orderItem('Mediterranean Seafood Pasta')">Order Now</button>
+                        <button class="order-btn" onclick="orderItem('Mediterranean Seafood Pasta')" data-en="Order Now" data-am="Պdelays">Order Now</button>
                     </div>
                 </div>
             </div>
@@ -676,7 +714,7 @@
                 <div class="menu-item-content">
                     <div class="menu-item-header">
                         <div>
-                            <h3 class="menu-item-title">Seared Salmon</h3>
+                            <h3 class="menu-item-title" data-en="Seared Salmon" data-am="Սdelays delays">Seared Salmon</h3>
                             <div class="rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -687,10 +725,10 @@
                         </div>
                         <span class="menu-item-price">$18</span>
                     </div>
-                    <p class="menu-item-description">Perfectly seared Atlantic salmon with lemon butter sauce, asparagus, and quinoa.</p>
+                    <p class="menu-item-description" data-en="Perfectly seared Atlantic salmon with lemon butter sauce, asparagus, and quinoa." data-am="Իdelays delays delays delays delays delays delays delays">Perfectly seared Atlantic salmon with lemon butter sauce, asparagus, and quinoa.</p>
                     <div class="menu-item-footer">
                         <span><i class="fas fa-clock"></i> 20 min</span>
-                        <button class="order-btn" onclick="orderItem('Seared Salmon')">Order Now</button>
+                        <button class="order-btn" onclick="orderItem('Seared Salmon')" data-en="Order Now" data-am="Պdelays">Order Now</button>
                     </div>
                 </div>
             </div>
@@ -699,12 +737,12 @@
             <div class="menu-item" data-category="desserts">
                 <div class="menu-item-image">
                     <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=800" alt="Chocolate Cake">
-                    <span class="menu-badge">Sweet</span>
+                    <span class="menu-badge" data-en="Sweet" data-am="Քdelays">Sweet</span>
                 </div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
                         <div>
-                            <h3 class="menu-item-title">Molten Chocolate Cake</h3>
+                            <h3 class="menu-item-title" data-en="Molten Chocolate Cake" data-am="Հdelays delays delays">Molten Chocolate Cake</h3>
                             <div class="rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -715,10 +753,10 @@
                         </div>
                         <span class="menu-item-price">$14</span>
                     </div>
-                    <p class="menu-item-description">Warm chocolate lava cake with a gooey center, served with vanilla bean ice cream.</p>
+                    <p class="menu-item-description" data-en="Warm chocolate lava cake with a gooey center, served with vanilla bean ice cream." data-am="Տdelays delays delays delays delays delays delays delays">Warm chocolate lava cake with a gooey center, served with vanilla bean ice cream.</p>
                     <div class="menu-item-footer">
                         <span><i class="fas fa-clock"></i> 15 min</span>
-                        <button class="order-btn" onclick="orderItem('Molten Chocolate Cake')">Order Now</button>
+                        <button class="order-btn" onclick="orderItem('Molten Chocolate Cake')" data-en="Order Now" data-am="Պdelays">Order Now</button>
                     </div>
                 </div>
             </div>
@@ -731,7 +769,7 @@
                 <div class="menu-item-content">
                     <div class="menu-item-header">
                         <div>
-                            <h3 class="menu-item-title">Signature Mojito</h3>
+                            <h3 class="menu-item-title" data-en="Signature Mojito" data-am="Հdelays delays">Signature Mojito</h3>
                             <div class="rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -742,38 +780,38 @@
                         </div>
                         <span class="menu-item-price">$11</span>
                     </div>
-                    <p class="menu-item-description">Refreshing blend of white rum, fresh mint, lime juice, sugar, and soda water.</p>
+                    <p class="menu-item-description" data-en="Refreshing blend of white rum, fresh mint, lime juice, sugar, and soda water." data-am="Զdelays delays delays delays delays delays delays delays">Refreshing blend of white rum, fresh mint, lime juice, sugar, and soda water.</p>
                     <div class="menu-item-footer">
                         <span><i class="fas fa-clock"></i> 5 min</span>
-                        <button class="order-btn" onclick="orderItem('Signature Mojito')">Order Now</button>
+                        <button class="order-btn" onclick="orderItem('Signature Mojito')" data-en="Order Now" data-am="Պdelays">Order Now</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Video Section -->
-    <section class="video-section" id="video">
-        <h2 class="section-title">Culinary Experience</h2>
-        <p class="section-subtitle">Watch our chefs create magic in the kitchen</p>
+    <!-- Chef Story Section -->
+    <section class="chef-story" id="chef">
+        <h2 class="section-title" data-en="Meet Our Chef" data-am="Ծdelays delays">Meet Our Chef</h2>
+        <p class="section-subtitle" data-en="A passion for culinary excellence" data-am="Խdelays delays delays delays">A passion for culinary excellence</p>
         
-        <div class="video-container">
-            <div class="video-placeholder" onclick="playVideo()">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
-                </div>
+        <div class="chef-content">
+            <div class="chef-image">
+                <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=800" alt="Chef">
             </div>
-            <!-- You can replace this with actual video -->
-            <!-- <video controls>
-                <source src="your-video.mp4" type="video/mp4">
-            </video> -->
+            <div class="chef-text">
+                <h3 data-en="Chef Alexander" data-am="Շdelays delays">Chef Alexander</h3>
+                <p data-en="With over 20 years of culinary experience across Europe and Asia, Chef Alexander brings a unique fusion of flavors to every dish. His passion for using the freshest local ingredients combined with traditional techniques creates an unforgettable dining experience." data-am="Delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays">With over 20 years of culinary experience across Europe and Asia, Chef Alexander brings a unique fusion of flavors to every dish. His passion for using the freshest local ingredients combined with traditional techniques creates an unforgettable dining experience.</p>
+                <p data-en="Every plate that leaves our kitchen tells a story of dedication, creativity, and love for the culinary arts." data-am="Delays delays delays delays delays delays delays delays delays delays delays">Every plate that leaves our kitchen tells a story of dedication, creativity, and love for the culinary arts.</p>
+                <p class="chef-signature" data-en="— Chef Alexander, Executive Chef" data-am="— Delays delays, delays delays">— Chef Alexander, Executive Chef</p>
+            </div>
         </div>
     </section>
 
     <!-- Gallery Section -->
     <section id="gallery">
-        <h2 class="section-title">Food Gallery</h2>
-        <p class="section-subtitle">A visual journey through our culinary creations</p>
+        <h2 class="section-title" data-en="Food Gallery" data-am="Уdelays delays">Food Gallery</h2>
+        <p class="section-subtitle" data-en="A visual journey through our culinary creations" data-am="Delays delays delays delays delays delays delays">A visual journey through our culinary creations</p>
         
         <div class="gallery">
             <div class="gallery-item">
@@ -807,7 +845,7 @@
     <footer id="contact">
         <div class="footer-content">
             <h2 class="logo">Gourmet<span>Delights</span></h2>
-            <p>Experience the finest cuisine in an elegant atmosphere</p>
+            <p data-en="Experience the finest cuisine in an elegant atmosphere" data-am="Delays delays delays delays delays delays">Experience the finest cuisine in an elegant atmosphere</p>
             <div class="social-links">
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
                 <a href="#"><i class="fab fa-instagram"></i></a>
@@ -821,22 +859,110 @@
     <!-- Order Modal -->
     <div class="modal" id="orderModal">
         <div class="modal-content">
-            <h3>Order Placed Successfully!</h3>
+            <h3 data-en="Order Placed Successfully!" data-am="Delays delays delays!">Order Placed Successfully!</h3>
             <p id="orderMessage">Thank you for your order!</p>
-            <button class="close-modal" onclick="closeModal()">Close</button>
+            <button class="close-modal" onclick="closeModal()" data-en="Close" data-am="Delays">Close</button>
         </div>
     </div>
 
     <script>
+        // Language Translation Data
+        const translations = {
+            en: {
+                'home': 'Home',
+                'menu': 'Menu',
+                'chef': 'Our Chef',
+                'gallery': 'Gallery',
+                'contact': 'Contact',
+                'hero-title': 'Exquisite Culinary Experience',
+                'hero-subtitle': 'Savor the art of fine dining with our carefully crafted dishes',
+                'hero-cta': 'Explore Our Menu',
+                'menu-title': 'Our Menu',
+                'menu-subtitle': 'Discover our signature dishes prepared with passion and precision',
+                'cat-all': 'All',
+                'cat-appetizers': 'Appetizers',
+                'cat-mains': 'Main Course',
+                'cat-desserts': 'Desserts',
+                'cat-beverages': 'Beverages',
+                'chef-title': 'Meet Our Chef',
+                'chef-subtitle': 'A passion for culinary excellence',
+                'gallery-title': 'Food Gallery',
+                'gallery-subtitle': 'A visual journey through our culinary creations',
+                'footer-text': 'Experience the finest cuisine in an elegant atmosphere',
+                'order-success': 'Order Placed Successfully!',
+                'close': 'Close',
+                'popular': 'Popular',
+                'chef-special': "Chef's Special",
+                'sweet': 'Sweet',
+                'order-now': 'Order Now'
+            },
+            am: {
+                'home': 'Գլdelays',
+                'menu': 'Մdelays',
+                'chef': 'Մdelays delays',
+                'gallery': 'Պdelays',
+                'contact': 'Կdelays',
+                'hero-title': 'Հdelays Հdelays Հdelays',
+                'hero-subtitle': 'Վdelays delays delays delays delays delays',
+                'hero-cta': 'Ուdelays delays delays',
+                'menu-title': 'Մdelays Մdelays',
+                'menu-subtitle': 'Բdelays delays delays delays delays delays delays',
+                'cat-all': 'Բdelays',
+                'cat-appetizers': 'Նdelays',
+                'cat-mains': 'Հdelays delays',
+                'cat-desserts': 'Անdelays',
+                'cat-beverages': 'Խdelays',
+                'chef-title': 'Ծdelays delays',
+                'chef-subtitle': 'Խdelays delays delays delays',
+                'gallery-title': 'Уdelays delays',
+                'gallery-subtitle': 'Delays delays delays delays delays delays delays',
+                'footer-text': 'Delays delays delays delays delays delays',
+                'order-success': 'Delays delays delays!',
+                'close': 'Delays',
+                'popular': 'Հdelays',
+                'chef-special': 'Delays delays',
+                'sweet': 'Քdelays',
+                'order-now': 'Delays'
+            }
+        };
+
+        let currentLang = 'en';
+
+        // Language Switcher
+        const langBtns = document.querySelectorAll('.lang-btn');
+        
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-lang');
+                currentLang = lang;
+                
+                // Update active button
+                langBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Update all translatable elements
+                updateLanguage(lang);
+            });
+        });
+
+        function updateLanguage(lang) {
+            // Update all elements with data-en and data-am attributes
+            const elements = document.querySelectorAll('[data-en]');
+            elements.forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text) {
+                    el.textContent = text;
+                }
+            });
+        }
+
         // Category Filter
         const categoryBtns = document.querySelectorAll('.category-btn');
         const menuItems = document.querySelectorAll('.menu-item');
 
         categoryBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Remove active class from all buttons
                 categoryBtns.forEach(b => b.classList.remove('active'));
-                // Add active class to clicked button
                 btn.classList.add('active');
 
                 const category = btn.getAttribute('data-category');
@@ -856,7 +982,8 @@
         function orderItem(itemName) {
             const modal = document.getElementById('orderModal');
             const message = document.getElementById('orderMessage');
-            message.textContent = `You have ordered: ${itemName}. We will prepare it fresh for you!`;
+            const successText = currentLang === 'en' ? 'You have ordered' : 'Делays delays';
+            message.textContent = `${successText}: ${itemName}. ${currentLang === 'en' ? 'We will prepare it fresh for you!' : 'Delays delays delays delays!'}`;
             modal.classList.add('active');
         }
 
@@ -871,12 +998,6 @@
             if (event.target == modal) {
                 modal.classList.remove('active');
             }
-        }
-
-        // Video Play Function
-        function playVideo() {
-            alert('Video would play here. Replace the placeholder with your actual video embed code.');
-            // You can implement actual video playback here
         }
 
         // Smooth Scroll
